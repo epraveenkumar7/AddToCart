@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Cart</title>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #d9a7c7;  
+      background: -webkit-linear-gradient(to left, #fffcdc, #d9a7c7);  
+      background: linear-gradient(to left, #fffcdc, #d9a7c7); 
+
+      
+  
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      
+      
+    }
+
+    
+    .cart-item-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+      
+    }
+
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #3A1C71; 
+background: -webkit-linear-gradient(to left, #FFAF7B, #D76D77, #3A1C71); 
+background: linear-gradient(to left, #FFAF7B, #D76D77, #3A1C71); 
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .cart-item img {
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+ 
+    .movie-details {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .movie-details h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .movie-details p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+ 
+    .quantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .quantity label {
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    .quantity input {
+      width: 60px;
+      padding: 5px;
+      font-size: 16px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .add-to-cart-button {
+      margin-top: 10px;
+      padding: 12px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .add-to-cart-button:hover {
+      background-color: #218838;
+    }
+
+    .cart-count {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .individual-cart-count {
+      font-size: 16px;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+    @media (max-width: 768px) {
+      .cart-item-container {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item img {
+        width: 100px;
+        margin-bottom: 15px;
+      }
+
+      .movie-details h3 {
+        font-size: 20px;
+      }
+
+      .quantity input {
+        width: 50px;
+        font-size: 14px;
+      }
+
+      .add-to-cart-button {
+        padding: 10px 15px;
+      }
+
+      .cart-count {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cart-item {
+        padding: 10px;
+      }
+
+      .movie-details h3 {
+        font-size: 18px;
+      }
+
+      .quantity input {
+        width: 45px;
+      }
+
+      .add-to-cart-button {
+        padding: 8px 12px;
+      }
+
+      .cart-count {
+        font-size: 16px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="cart-item-container">
+      
+    
+      <div class="cart-item">
+        <img src="anbe sivam.jpeg" alt="Movie Ticket" />
+        <div class="movie-details">
+          <h3>ANBE SIVAM</h3>
+          <p>Showtime: 7:00 PM</p>
+          <p>Date: December 24, 2024</p>
+          <p>Price per ticket: 120</p>
+          <p>Total: <span id="total1">330</span></p>
+        </div>
+        <div class="quantity">
+          <label for="quantity1">Quantity: </label>
+          <input type="number" id="quantity1" name="quantity1" value="3" min="1" max="10"/>
+        </div>
+        <button class="add-to-cart-button" onclick="addToCart(1)">Add to Cart</button>
+      
+        <div class="individual-cart-count" id="cartCount1">Cart Count: 0</div>
+      </div>
+
+     
+      <div class="cart-item">
+        <img src="guna.jpg" alt="Movie Ticket" />
+        <div class="movie-details">
+          <h3>GUNAA</h3>
+          <p>Showtime: 9:00 PM</p>
+          <p>Date: December 24, 2024</p>
+          <p>Price per ticket: 110</p>
+          <p>Total: <span id="total2">330</span></p>
+        </div>
+        <div class="quantity">
+          <label for="quantity2">Quantity: </label>
+          <input type="number" id="quantity2" name="quantity2" value="3" min="1" max="10"/>
+        </div>
+        <button class="add-to-cart-button" onclick="addToCart(2)">Add to Cart</button>
+       
+        <div class="individual-cart-count" id="cartCount2">Cart Count: 0</div>
+      </div>
+
+    </div>
+
+    
+    <div class="cart-count">
+      Overall Cart Count: <span id="overallCartCount">0</span>
+    </div>
+  </div>
+
+  <script>
+   
+    let overallCartCount = 0;
+    let cartCount1 = 0;
+    let cartCount2 = 0;
+
+    
+    function addToCart(ticketNumber) {
+     
+      const quantity = parseInt(document.getElementById('quantity' + ticketNumber).value);
+
+      
+      if (ticketNumber === 1) {
+        cartCount1 += quantity;
+        document.getElementById('cartCount1').innerText = "Cart Count: " + cartCount1;
+       
+        document.getElementById('total1').innerText = (cartCount1 * 15).toFixed(2);
+      } else if (ticketNumber === 2) {
+        cartCount2 += quantity;
+        document.getElementById('cartCount2').innerText = "Cart Count: " + cartCount2;
+   
+        document.getElementById('total2').innerText = (cartCount2 * 15).toFixed(2);
+      }
+
+   
+      overallCartCount = cartCount1 + cartCount2;
+      document.getElementById('overallCartCount').innerText = overallCartCount;
+    }
+  </script>
+
+</body>
+</html>
